@@ -1,0 +1,1 @@
+// https://newsapi.org/v2/everything?q=Apple&from=2021-11-30&sortBy=popularity&apiKey=API_KEY
