@@ -1,6 +1,7 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
-import 'package:world_news/layout/news_app/cubit/cubit.dart';
+
+import 'package:world_news/layout/news_app/theme_cubit/theme_cubit.dart';
 import 'package:world_news/modules/web_view/web_view_screen.dart';
 
 Widget defaultButton({
@@ -8,7 +9,7 @@ Widget defaultButton({
   double width = double.infinity,
   double radius = 0,
   Color background = Colors.blue,
-  required VoidCallback onPressed, // voidcallback = void Function()
+  required VoidCallback onPressed, // voidCallback = void Function()
   required String text,
 }) =>
     Container(
@@ -33,9 +34,9 @@ Widget imageTest(itemMap) {
     width: 150,
     fit: BoxFit.cover,
     fadeInDuration: Duration(milliseconds: 800),
-    fadeInCurve: Curves.linear,
+    fadeInCurve: Curves.fastLinearToSlowEaseIn,
     placeholder: 'assets/image/Default_Image.png',
-    image: '${itemMap['urlToImage']}',
+    image: itemMap['urlToImage']??'assets/image/Default_Image.png',
     imageErrorBuilder: (context, error, stackTrace) {
       return Container(
         height: 150,
@@ -76,10 +77,13 @@ Widget articleItem(itemMap, BuildContext context) {
                   Expanded(
                     child: Text(
                       '${itemMap['title']}',
+                      textDirection: TextDirection.rtl,
                       style: Theme.of(context).textTheme.bodyText1,
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.end,
+                      textAlign: TextAlign.start,
+
+
                     ),
                   ),
                   Row(
@@ -90,7 +94,6 @@ Widget articleItem(itemMap, BuildContext context) {
                         style: TextStyle(
                           fontSize: 12,
                           color: Colors.grey,
-
                         ),
                       ),
                     ],
@@ -99,7 +102,6 @@ Widget articleItem(itemMap, BuildContext context) {
               ),
             ),
           ),
-
         ],
       ),
     ),
@@ -158,9 +160,9 @@ Widget defaultFormField(
         Function? onFieldSubmitted // mohem
         }) =>
     TextFormField(
-      style: TextStyle(color: NewsCubit.get(context).darkMode
-          ? Colors.white
-          : Colors.black),
+      style: TextStyle(
+          color:
+              ThemeCubit.get(context).darkMode ? Colors.white : Colors.black),
       onEditingComplete: onEditingComplete,
       onTap: onTap,
       obscureText: obscureText,
@@ -168,17 +170,17 @@ Widget defaultFormField(
       decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
-                color: NewsCubit.get(context).darkMode
+                color: ThemeCubit.get(context).darkMode
                     ? Colors.white
                     : Colors.deepOrange)),
         labelStyle: TextStyle(
             color:
-                NewsCubit.get(context).darkMode ? Colors.white : Colors.grey),
+                ThemeCubit.get(context).darkMode ? Colors.white : Colors.grey),
         labelText: labelText,
         border: OutlineInputBorder(),
         prefixIcon: Icon(
           prefixIcon,
-          color: NewsCubit.get(context).darkMode
+          color: ThemeCubit.get(context).darkMode
               ? Colors.white
               : Colors.deepOrange,
         ),
@@ -191,7 +193,5 @@ Widget defaultFormField(
       // or like this
       onChanged: onChanged,
       validator: validator,
-      onFieldSubmitted:(value) {
-        
-      } ,
+      onFieldSubmitted: (value) {},
     );

@@ -3,12 +3,13 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:world_news/layout/news_app/cubit/states.dart';
+
+import 'package:world_news/layout/news_app/news_cubit/states.dart';
 import 'package:world_news/modules/business/business_screen.dart';
 import 'package:world_news/modules/science/science_screen.dart';
 
 import 'package:world_news/modules/sports/sports_screen.dart';
-import 'package:world_news/shared/network/local/cache_helper.dart';
+
 import 'package:world_news/shared/network/remote/dio_helper.dart';
 
 class NewsCubit extends Cubit<NewsStates> {
@@ -101,12 +102,9 @@ class NewsCubit extends Cubit<NewsStates> {
     });
   }
 
-
-
   List<dynamic> search = [];
 
   void getSearch(String? searchValue) {
-
     emit(NewsGetSearchLoadingState());
     DioHelper.getData(url: 'v2/everything', query: {
       'q': '$searchValue',
@@ -118,25 +116,5 @@ class NewsCubit extends Cubit<NewsStates> {
       emit(NewsGetSearchErrorState(error.toString()));
       print('get data error :*: ${error.toString()} :*:');
     });
-  }
-
-
-
-
-
-
-
-
-  bool darkMode = false;
-
-  void changeThemeMode({bool? isDark}) {
-    if (isDark != null) {
-      darkMode = isDark;
-      emit(NewsThemeModeChangedState());
-    } else {
-      darkMode = !darkMode;
-      CacheHelper.putData(key: 'darkMode', value: darkMode).then((value) {});
-      emit(NewsThemeModeChangedState());
-    }
   }
 }

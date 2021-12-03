@@ -34,7 +34,7 @@ class NewsGetScienceErrorState extends NewsStates {
 
 class NewsGetScienceLoadingState extends NewsStates {}
 
-class NewsThemeModeChangedState extends NewsStates{}
+
 
 
 class NewsGetSearchSuccessState extends NewsStates {}
