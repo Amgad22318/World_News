@@ -129,7 +129,7 @@ Widget articleBuilder(List<dynamic> list, {isSearch = false}) {
             return articleItem(list[index], context);
           },
           separatorBuilder: (context, index) => listViewSeparator(),
-          itemCount: list.length);
+          itemCount: 10);
     },
     fallback: (context) =>
         isSearch ? Container() : Center(child: CircularProgressIndicator()),
