@@ -1,6 +1,6 @@
 # world_news
 
-World_News app  by using NewsAPI
+WorldNews.. app by using NewsAPI , Bloc as state management Shared Preferences, Dio for APIs handling
 
 
 
